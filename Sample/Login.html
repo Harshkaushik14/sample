@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login Page</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+      integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"
+      integrity="sha512-E8QSvWZ0eCLGk4km3hxSsNmGWbLtSCSUcewDQPQWZF6pEU8GlT8a5fF32wOl1i8ftdMhssTrF/OhyGWwonTcXA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <style>
+        body{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            width: 100vw;
+            margin: 0px;
+        }
+    </style>
+  </head>
+  <body>
+
+    <div class="mb-5">
+        <h3 class="mb-3">Login</h3>
+        <input type="text" placeholder="PhoneNumber" id="numberInp" class="form-control mb-3"/>
+        <input type="text" placeholder="Password" id="passInp" class="form-control mb-3"/>
+        <div class="custom-control custom-switch mb-3">
+            <input type="checkbox" class="custom-control-input" id="customSwitch1">
+            <label class="custom-control-label" for="customSwitch1">Keep me logged in</label>
+          </div>
+<button type="text" id="sub_btn" class="btn btn-outline-primary mb-3 w-100">Login</button>
+<a href="Register.html" class="badge badge-secondary py-1 w-100">Want to create a new Accouny?</a>
+    </div>
+    <script type="module">
+      // FirebaeConfiguration
+
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-app.js";
+
+      const firebaseConfig = {
+        apiKey: "AIzaSyBO2Uv33T838ctjOy_e2lYDlc29hB8SRxc",
+        authDomain: "sample-ee371.firebaseapp.com",
+        databaseURL: "https://sample-ee371-default-rtdb.firebaseio.com",
+        projectId: "sample-ee371",
+        storageBucket: "sample-ee371.appspot.com",
+        messagingSenderId: "641716440119",
+        appId: "1:641716440119:web:143efb6b151bb5cd31c3b2",
+      };
+
+      const app = initializeApp(firebaseConfig);
+
+      import {
+        getDatabase,
+        ref,
+        set,
+        child,
+        get,
+      } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-database.js";
+
+      const db = getDatabase();
+    </script>
+  </body>
+</html>

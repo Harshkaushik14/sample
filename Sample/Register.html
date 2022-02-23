@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register Page</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+      integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"
+      integrity="sha512-E8QSvWZ0eCLGk4km3hxSsNmGWbLtSCSUcewDQPQWZF6pEU8GlT8a5fF32wOl1i8ftdMhssTrF/OhyGWwonTcXA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        width: 100vw;
+        margin: 0px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="mb-5">
+      <h3 class="mb-3">Register</h3>
+      <!-- <input
+        type="text"
+        placeholder="Full Name"
+        id="nameInp"
+        class="form-control mb-3"
+      /> -->
+      <input
+      type="text"
+      placeholder="Username"
+      id="userInp"
+      class="form-control mb-3"
+    />
+      <input
+        type="text"
+        placeholder="Email"
+        id="emailInp"
+        class="form-control mb-3"
+      />
+     
+      <!-- <input
+        type="text"
+        placeholder="PhoneNumber"
+        id="numberInp"
+        class="form-control mb-3"
+      /> -->
+      <input
+        type="password"
+        placeholder="Password"
+        id="passInp"
+        class="form-control mb-3"
+      />
+      <button
+        type="text"
+        id="sub_btn"
+        class="btn btn-outline-primary mb-3 w-100"
+      >
+        Register
+      </button>
+      <a href="Login.html" class="badge badge-secondary py-1 w-100"
+        >Already Have An Account?</a
+      >
+    </div>
+    <script type="module">
+      // FirebaeConfiguration
+
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-app.js";
+
+      const firebaseConfig = {
+        apiKey: "AIzaSyBO2Uv33T838ctjOy_e2lYDlc29hB8SRxc",
+        authDomain: "sample-ee371.firebaseapp.com",
+        databaseURL: "https://sample-ee371-default-rtdb.firebaseio.com",
+        projectId: "sample-ee371",
+        storageBucket: "sample-ee371.appspot.com",
+        messagingSenderId: "641716440119",
+        appId: "1:641716440119:web:143efb6b151bb5cd31c3b2",
+      };
+
+      const app = initializeApp(firebaseConfig);
+
+      import {
+        getDatabase,
+        ref,
+        set,
+        child,
+        get,
+      } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-database.js";
+
+      const db = getDatabase();
+
+      //   Refrences
+
+      // const name = document.getElementById("nameInp");
+      const email = document.getElementById("emailInp");
+      // const number = document.getElementById("numberInp");
+      const username = document.getElementById("userInp");
+      const password = document.getElementById("passInp");
+      const submit = document.getElementById("sub_btn");
+
+      // Validation
+
+      function Validation() {
+        // let nameregex = /^[a-zA-Z\s]+$/;
+        let emailregex = /^[a-zA-Z0-9]+@(gmail|yahoo|outlook)\.com$/;
+       let userregex = /^[a-zA-Z0-9]{5,}$/;
+        // let phone = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
+
+        // if (!nameregex.test(name.value)) {
+        //   alert("the name should only contain alphabets");
+        //   return false;
+        // }
+
+        if (!emailregex.test(email.value)) {
+          alert("Enter a valid Email");
+          return false;
+        }
+
+        // if (!userregex.test(username.value)) {
+        //   alert(
+        //     "-username can only be alphanumeric\n-username must be of atleast 5 characters\n-username cannot contain spaces"
+        //   );
+        //   return false;
+        // }
+        return true;
+      }
+
+      //   Register User to Firebase
+
+      function RegisterUser() {
+        if(!Validation()){
+            return;
+        };
+        const dbRef = ref(db);
+
+        get(child(dbRef, "UserList/" + username.value)).then((snapshot) => {
+          if (snapshot.exists()) {
+            alert("Account Already Exist!");
+          } else {
+            set(ref(db, "UserList/" +username.value), {
+              // fullname: name.value,
+              email: email.value,
+              // username: username.value,
+              password: password.value,
+            })
+              .then(() => {
+                alert("User Added successfully ");
+              })
+              .catch((error) => {
+                alert("error" + error);
+              });
+          }
+        });
+      }
+
+
+    //   Assign The Event
+
+    submit.addEventListener('click', RegisterUser);
+    </script>
+
+  </body>
+</html>
